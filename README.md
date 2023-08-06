@@ -2,11 +2,11 @@
 
 To view this project locally:
 
-### `git clone git@github.com:AvrilMaleham/tower.git`
+### `git clone git@github.com:AvrilMaleham/typescript_form.git`
 
 Clone the app into the directory of your choice.
 
-### `cd tower/frontend`
+### `cd typescript_form/frontend`
 
 Change directory into the frontend.
 

@@ -8,22 +8,58 @@ const defaultFormInputs = {
   expiry: "",
 };
 
+type FormErrors = {
+  cardNumber? : string;
+  cvc?: string;
+  expiry?: string;
+}
+
+
 const FormView: React.FC = () => {
   const [formInputs, setFormInputs] = useState(defaultFormInputs);
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
 
   const { cardNumber, cvc, expiry } = formInputs;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormErrors({});
     setFormInputs((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
+  };
+
+  const validateForm = () => {
+    const errors: FormErrors = {};
+
+    if (cardNumber.length !== 16) {
+      errors["cardNumber"] = "Card number must be 16 digits.";
+    }
+
+    if (cvc.length !== 3) {
+      errors["cvc"] = "CVC must be 3 digits.";
+    }
+
+    const today = new Date();
+    const expiryDate = new Date(expiry);
+
+    if (expiryDate < today ) {
+      errors["expiry"] = "Expiry date must not be in the past.";
+    }
+
+    return errors;
+  }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formInputs);
-
-    setFormInputs(defaultFormInputs);
+    const errors = validateForm();
+    if (Object.keys(errors).length === 0) {
+      console.log(formInputs);
+      setFormInputs(defaultFormInputs);
+    } else {
+      setFormErrors(errors);
+    }
+   
   };
 
   return (
@@ -51,6 +87,7 @@ const FormView: React.FC = () => {
             value={cardNumber}
             onChange={onChange}
           />
+          <div className="Error">{formErrors["cardNumber"]}</div>
           <br></br>
 
           <label htmlFor="cvc">CVC</label>
@@ -62,6 +99,7 @@ const FormView: React.FC = () => {
             value={cvc}
             onChange={onChange}
           />
+          <div className="Error">{formErrors["cvc"]} </div>
           <br></br>
 
           <label htmlFor="expiry">Expiry</label>
@@ -73,6 +111,7 @@ const FormView: React.FC = () => {
             value={expiry}
             onChange={onChange}
           />
+          <div className="Error">{formErrors["expiry"]} </div>
           <br></br>
 
           <button className="Button" type="submit">
