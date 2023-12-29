@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest # the OS your job should run on
     steps:
       - name: Checkout source code
-        # checks out your repository under the GitHub workspace so that your workflow can access it
         uses: actions/checkout@v2
 
       - name: Generate Deployment Package 
