@@ -24,3 +24,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 - Typescript
 - If/Else form validation
 - Jest unit tests 
+- Deployed to AWS
