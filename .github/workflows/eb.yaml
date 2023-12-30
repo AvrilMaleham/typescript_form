@@ -1,6 +1,6 @@
 name: Deploy typescript_form from GitHub to AWS Elastic Beanstalk
 on:
-  # activates the workflow when there is a push on the main branch
+  # activate the workflow when there is a push on the main branch
   push:
     branches:
       - main
