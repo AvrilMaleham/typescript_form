@@ -6,10 +6,6 @@ To view this project locally:
 
 Clone the app into the directory of your choice.
 
-### `cd typescript_form/frontend`
-
-Change directory into the frontend.
-
 ### `npm install`
 
 Install the dependencies. 
